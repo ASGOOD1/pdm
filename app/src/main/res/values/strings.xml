@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PDM</string>
+
+    <!-- Error messages -->
+    <string name="error_fragment_message">An error occurred</string>
+    <string name="dismiss_error">Dismiss</string>
+    <string name="unidelivery">UniDelivery</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="loginAction">LOGIN</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="create_account">Create Account</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="select">Select Supplier</string>
+    <string name="select_supplier">Select supplier:</string>
+</resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    style="@style/Theme.PDM"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="19dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noid" />
+
+    <EditText
+        android:id="@+id/noid"
+        style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+        android:layout_width="333dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="39dp"
+        android:autofillHints=""
+        android:clickable="false"
+        android:contextClickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:fontFamily="sans-serif-black"
+        android:inputType="none"
+        android:text="@string/suppliers"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/txtViewSuppliers"
+        android:layout_width="89dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="1dp"
+        android:text="@string/select_supplier"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_suppliers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <Spinner
+        android:id="@+id/spinner_suppliers"
+        android:layout_width="274dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="52dp"
+        android:dropDownWidth="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtViewSuppliers"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <ListView
+        android:id="@+id/productsList"
+        android:layout_width="408dp"
+        android:layout_height="443dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_suppliers" >
+
+    </ListView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/goToCartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="456dp"
+        android:clickable="true"
+        android:contentDescription="Cart"
+        android:focusable="auto"
+        android:focusableInTouchMode="true"
+        app:backgroundTint="#855236"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_suppliers"
+        app:srcCompat="@drawable/ic_cart_foreground" />
+
+    <EditText
+        android:id="@+id/cartItems"
+        android:layout_width="73dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:clickable="false"
+        android:editable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="none"
+        android:text="0 items"
+        app:layout_constraintEnd_toStartOf="@+id/goToCartBtn"
+        app:layout_constraintTop_toTopOf="@+id/goToCartBtn"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

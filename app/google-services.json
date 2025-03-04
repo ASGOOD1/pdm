@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "79494368252",
+    "project_id": "pdmfireb",
+    "storage_bucket": "pdmfireb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79494368252:android:b109ee61b3bc2335934079",
+        "android_client_info": {
+          "package_name": "com.example.pdm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz-BHQWoNRUxawHwU7qRyPT4vgoDc-uU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
