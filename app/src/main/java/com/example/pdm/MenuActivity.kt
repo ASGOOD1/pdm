@@ -1,9 +1,11 @@
 package com.example.pdm
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.SimpleAdapter
@@ -13,10 +15,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MenuActivity : AppCompatActivity() {
-    private val cartItemsNr : Int = 0
+    private var cartItemsNr : Int = 0
     private lateinit var databaseHelper: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         databaseHelper = DatabaseHelper(this)
@@ -34,7 +37,7 @@ class MenuActivity : AppCompatActivity() {
             insets
         }
         val cartItemsText : EditText = findViewById(R.id.cartItems)
-        val str = "$cartItemsNr items"
+        var str = "$cartItemsNr items"
         cartItemsText.setText(str)
         val spinner = findViewById<Spinner>(R.id.spinner_suppliers)
         if (spinner != null) {
@@ -73,9 +76,14 @@ class MenuActivity : AppCompatActivity() {
                             )
                         )
                         if(products.isNotEmpty()) {
-
                             productsListView.adapter = smpAdapter
                             productsListView.visibility = View.VISIBLE
+                            productsListView.setOnItemClickListener { pparent, _, pos, _ ->
+                                //val selectedItem = pparent.getItemAtPosition(pos)
+                                cartItemsNr++
+                                str = "$cartItemsNr items"
+                                cartItemsText.setText(str)
+                            }
                         }
                         else {
                             Toast.makeText(this@MenuActivity, "No products listed.", Toast.LENGTH_SHORT).show()
@@ -85,6 +93,11 @@ class MenuActivity : AppCompatActivity() {
                     else {
                         val productsListView: ListView = findViewById(R.id.productsList)
                         productsListView.visibility = View.INVISIBLE
+                    }
+                    val btnGoToCart: FloatingActionButton = findViewById(R.id.goToCartBtn)
+                    btnGoToCart.setOnClickListener {
+                        val intent = Intent(this@MenuActivity, CartActivity::class.java)
+                        startActivity(intent)
                     }
 
                 }

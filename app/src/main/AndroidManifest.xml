@@ -4,12 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
     <uses-feature
         android:name="android.software.leanback"
         android:required="true" />
+
     <meta-data
         android:name="firebase_messaging_auto_init_enabled"
         android:value="true" />
@@ -24,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PDM"
         tools:targetApi="31">
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
@@ -45,6 +50,7 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name="com.google.firebase.messaging.FirebaseMessagingService"
             android:exported="false">
@@ -54,7 +60,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".MyFirebaseMessagingService"
+        <service
+            android:name=".MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.abc.xyz.restart_service" />

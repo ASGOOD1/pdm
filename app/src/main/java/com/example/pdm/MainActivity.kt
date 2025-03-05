@@ -12,7 +12,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.FileInputStream
-import java.nio.file.Paths
 object FCMHelper {
     private const val FCM_URL = "https://fcm.googleapis.com/v1/projects/pdmfireb/messages:send"
 
