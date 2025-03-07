@@ -3,8 +3,6 @@ package com.example.pdm
 import android.os.Bundle
 import android.view.View
 import android.widget.ListView
-import android.widget.SimpleAdapter
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,32 +23,32 @@ class CartActivity : AppCompatActivity() {
         val productsListView: ListView = findViewById(R.id.cartListView)
         val data: MutableList<Map<String, String>> = mutableListOf()
 
-        val products = databaseHelper.loadProducts(1)
 
-        for (p in products) {
+        for (p in cartFull.cartItemsList) {
             val datum: MutableMap<String, String> = HashMap(2)
-            datum["name"] = p.name
-            datum["price"] = "Price: "+p.price.toString()+"RON"
+            datum["name"] = p.product.name
+            datum["price"] = "Price: " + p.price.toString() + "RON"
+            datum["qtty"] = p.qty.toString()
+            datum["id"] = p.product.toString()
             data.add(datum)
         }
-        val smpAdapter = SimpleAdapter(
+        val smpAdapter = AdapterExtended(
             this@CartActivity, data,
             R.layout.cart_item,
-            arrayOf("name", "price"),
+            arrayOf("name", "price", "qtty"),
             intArrayOf(
                 R.id.itemName,
-                android.R.id.text2
+                android.R.id.text2,
+                R.id.changeItemsNumber,
             )
         )
-        if(products.isNotEmpty()) {
+        if (cartFull.cartItemsList.isNotEmpty()) {
             productsListView.adapter = smpAdapter
             productsListView.visibility = View.VISIBLE
-            productsListView.setOnItemClickListener { pparent, view, pos, _ ->
-                if(view.id == R.id.removeItems) {
-                        val selectedItem = pparent.getItemAtPosition(pos)
-                    }
-                }
-            }
+
+
+
         }
 
     }
+}

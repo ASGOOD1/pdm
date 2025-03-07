@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.SimpleAdapter
@@ -37,6 +36,7 @@ class MenuActivity : AppCompatActivity() {
             insets
         }
         val cartItemsText : EditText = findViewById(R.id.cartItems)
+        cartItemsNr = cartFull.countItems()
         var str = "$cartItemsNr items"
         cartItemsText.setText(str)
         val spinner = findViewById<Spinner>(R.id.spinner_suppliers)
@@ -79,10 +79,30 @@ class MenuActivity : AppCompatActivity() {
                             productsListView.adapter = smpAdapter
                             productsListView.visibility = View.VISIBLE
                             productsListView.setOnItemClickListener { pparent, _, pos, _ ->
-                                //val selectedItem = pparent.getItemAtPosition(pos)
-                                cartItemsNr++
-                                str = "$cartItemsNr items"
-                                cartItemsText.setText(str)
+                                val selectedItem = getItemName(pparent.getItemAtPosition(pos))
+                                Toast.makeText(this@MenuActivity, "Ai selectat $selectedItem", Toast.LENGTH_SHORT).show()
+                                var foundp : Product? = null
+                                for(p in products) {
+                                    if(selectedItem == p.name && p.supplier == id.toInt()) {
+                                        foundp = p
+                                        break
+                                    }
+                                }
+                                if(foundp != null) {
+                                    if (cartFull.isProductInList(foundp)) {
+                                        val cartItem: Cartitem? = cartFull.findItemCartID(foundp)
+                                        if(cartItem != null) {
+                                            cartItem.qty++
+                                            cartItem.price = cartItem.qty * foundp.price
+                                        }
+                                    }
+                                    else {
+                                        cartFull.addItemToCart(Cartitem(foundp, 1, foundp.price))
+                                    }
+                                    cartItemsNr = cartFull.countItems()
+                                    str = "$cartItemsNr items"
+                                    cartItemsText.setText(str)
+                                }
                             }
                         }
                         else {
@@ -97,6 +117,7 @@ class MenuActivity : AppCompatActivity() {
                     val btnGoToCart: FloatingActionButton = findViewById(R.id.goToCartBtn)
                     btnGoToCart.setOnClickListener {
                         val intent = Intent(this@MenuActivity, CartActivity::class.java)
+
                         startActivity(intent)
                     }
 
@@ -108,5 +129,10 @@ class MenuActivity : AppCompatActivity() {
             }
         }
 
+    }
+    companion object {
+        fun getItemName(i : Any?) : String {
+            return i.toString().substringAfter("name=").substringBefore(',')
+        }
     }
 }

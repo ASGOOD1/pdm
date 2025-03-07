@@ -41,4 +41,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cartListView"
         app:srcCompat="@drawable/baseline_call_made_24" />
+
+    <TextView
+        android:id="@+id/cartItemsTotalPrice"
+        android:layout_width="204dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Total: 4000RON"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartListView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

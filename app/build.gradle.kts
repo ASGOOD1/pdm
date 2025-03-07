@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
 }
-
 android {
     namespace = "com.example.pdm"
     compileSdk = 35
