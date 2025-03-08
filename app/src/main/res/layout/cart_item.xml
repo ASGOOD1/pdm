@@ -17,8 +17,8 @@
 
         <TextView
             android:id="@+id/itemName"
-            android:layout_width="103dp"
-            android:layout_height="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="34dp"
             android:text="Esspresso Lung"
@@ -42,7 +42,9 @@
             android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:editable="false"
             android:ems="10"
+            android:focusable="false"
             android:inputType="number"
             android:numeric="integer"
             android:singleLine="true"

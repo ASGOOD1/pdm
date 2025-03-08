@@ -32,10 +32,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val dropAccountsTableQuery = "DROP TABLE IF EXISTS accounts"
-        db?.execSQL(dropAccountsTableQuery)
-        val dropProductsTableQuery = "DROP TABLE IF EXISTS products"
-        db?.execSQL(dropProductsTableQuery)
+
         onCreate(db)
 
     }
@@ -129,11 +126,11 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
             db.insert("suppliers", null, values)
         }
     }
-    fun insertProduct() {
+    fun insertProduct(name: String, s: Int, price: Int) {
         val values = ContentValues().apply {
-            put("name", "Espresso Scurt")
-            put("supplier", 1)
-            put("price", 3)
+            put("name", name)
+            put("supplier", s)
+            put("price", price)
         }
         val db = writableDatabase
         db.insert("products", null, values)
@@ -142,6 +139,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
 
     companion object {
         private const val DB_NAME = "appdata.db"
-        private const val DB_VERSION = 12
+        private const val DB_VERSION = 14
     }
 }

@@ -94,8 +94,8 @@
 
     <EditText
         android:id="@+id/cartItems"
-        android:layout_width="73dp"
-        android:layout_height="46dp"
+        android:layout_width="127dp"
+        android:layout_height="42dp"
         android:layout_marginTop="8dp"
         android:clickable="false"
         android:editable="true"

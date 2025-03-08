@@ -20,6 +20,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MenuActivity : AppCompatActivity() {
     private var cartItemsNr : Int = 0
     private lateinit var databaseHelper: DatabaseHelper
+    override fun onResume() {
+        super.onResume()
+        val cartItemsText : EditText = findViewById(R.id.cartItems)
+        cartItemsNr = cartFull.countItems()
+        val str = "$cartItemsNr items"
+        cartItemsText.setText(str)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         databaseHelper = DatabaseHelper(this)
         val suppliers = databaseHelper.loadSuppliers()

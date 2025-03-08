@@ -7,7 +7,7 @@ data class Cartitem(val product: Product, var qty: Int, var price: Int) : Serial
 
 data class cartFull(private val context: Context) : Serializable {
     companion object {
-        val cartItemsList = mutableListOf<Cartitem>()
+        var cartItemsList = mutableListOf<Cartitem>()
         fun isProductInList(p: Any) : Boolean {
             for(c in cartItemsList) {
                 if(c.product == p) return true
@@ -23,9 +23,6 @@ data class cartFull(private val context: Context) : Serializable {
         fun addItemToCart(c: Cartitem) {
             cartItemsList.add(c)
         }
-        fun modifyItemQtty(c: Cartitem, q: Int) {
-            c.qty = q
-        }
         fun removeItemFromCart(c: Cartitem) {
             cartItemsList.remove(c)
         }
@@ -36,6 +33,13 @@ data class cartFull(private val context: Context) : Serializable {
             }
 
             return totalItems
+        }
+        fun getCartID(s: String) : Cartitem? {
+            for(p in cartItemsList) {
+                if(p.product.toString() == s)
+                    return p
+            }
+            return null
         }
     }
 }
