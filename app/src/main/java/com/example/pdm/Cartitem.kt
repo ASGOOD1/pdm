@@ -27,7 +27,7 @@ data class CartFull(private val context: Context) : Serializable {
             cartItemsList.remove(c)
         }
         fun countItems() : Int {
-            var totalItems: Int = 0
+            var totalItems = 0
             for(c in cartItemsList) {
                 if(c.qty > 0) totalItems += c.qty
             }
