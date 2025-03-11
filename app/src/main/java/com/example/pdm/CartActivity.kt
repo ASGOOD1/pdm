@@ -26,9 +26,9 @@ class CartActivity : AppCompatActivity() {
         val data: MutableList<Map<String, String>> = mutableListOf()
 
         var totalPricePaid = 0
-        var totalTax = cartFull.countItems()
+        val totalTax = CartFull.countItems()
 
-        for (p in cartFull.cartItemsList) {
+        for (p in CartFull.cartItemsList) {
             val datum: MutableMap<String, String> = HashMap(2)
             datum["name"] = p.product.name
             datum["price"] = "Price: " + p.price.toString() + "RON"
@@ -50,8 +50,8 @@ class CartActivity : AppCompatActivity() {
         )
         val totalPriceText : TextView = findViewById(R.id.cartItemsTotalPrice)
         val totalPriceStr: String = "Total: " + totalPricePaid.toString()+"RON"
-        totalPriceText.setText(totalPriceStr)
-        if (cartFull.cartItemsList.isNotEmpty()) {
+        totalPriceText.text = totalPriceStr
+        if (CartFull.cartItemsList.isNotEmpty()) {
             productsListView.adapter =  smpAdapter
             productsListView.visibility = View.VISIBLE
 

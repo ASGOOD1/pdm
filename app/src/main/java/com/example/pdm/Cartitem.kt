@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class Cartitem(val product: Product, var qty: Int, var price: Int) : Serializable
 
-data class cartFull(private val context: Context) : Serializable {
+data class CartFull(private val context: Context) : Serializable {
     companion object {
         var cartItemsList = mutableListOf<Cartitem>()
         fun isProductInList(p: Any) : Boolean {

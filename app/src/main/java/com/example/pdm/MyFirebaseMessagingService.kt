@@ -1,4 +1,3 @@
-package com.google.firebase.example.messaging.kotlin
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

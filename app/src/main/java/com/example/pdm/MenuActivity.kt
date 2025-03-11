@@ -23,7 +23,7 @@ class MenuActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val cartItemsText : EditText = findViewById(R.id.cartItems)
-        cartItemsNr = cartFull.countItems()
+        cartItemsNr = CartFull.countItems()
         val str = "$cartItemsNr items"
         cartItemsText.setText(str)
     }
@@ -43,7 +43,7 @@ class MenuActivity : AppCompatActivity() {
             insets
         }
         val cartItemsText : EditText = findViewById(R.id.cartItems)
-        cartItemsNr = cartFull.countItems()
+        cartItemsNr = CartFull.countItems()
         var str = "$cartItemsNr items"
         cartItemsText.setText(str)
         val spinner = findViewById<Spinner>(R.id.spinner_suppliers)
@@ -96,17 +96,17 @@ class MenuActivity : AppCompatActivity() {
                                     }
                                 }
                                 if(foundp != null) {
-                                    if (cartFull.isProductInList(foundp)) {
-                                        val cartItem: Cartitem? = cartFull.findItemCartID(foundp)
+                                    if (CartFull.isProductInList(foundp)) {
+                                        val cartItem: Cartitem? = CartFull.findItemCartID(foundp)
                                         if(cartItem != null) {
                                             cartItem.qty++
                                             cartItem.price = cartItem.qty * foundp.price
                                         }
                                     }
                                     else {
-                                        cartFull.addItemToCart(Cartitem(foundp, 1, foundp.price))
+                                        CartFull.addItemToCart(Cartitem(foundp, 1, foundp.price))
                                     }
-                                    cartItemsNr = cartFull.countItems()
+                                    cartItemsNr = CartFull.countItems()
                                     str = "$cartItemsNr items"
                                     cartItemsText.setText(str)
                                 }

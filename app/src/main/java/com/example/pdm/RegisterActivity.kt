@@ -57,15 +57,15 @@ class RegisterActivity : AppCompatActivity() {
             val username: String = textInputEditTextRegisterUsername.text.toString()
             val password: String = textInputEditTextRegisterPassword.text.toString()
             val email: String = textInputEditTextRegisterEmail.text.toString()
-            databaseHelper = DatabaseHelper(this);
+            databaseHelper = DatabaseHelper(this)
             if(databaseHelper.userOrEmailExists(username, email)) {
                 Toast.makeText(this, "Error! The username or email is already in use.", Toast.LENGTH_SHORT).show()
             }
             else {
-                databaseHelper.insertAccount(username, email, password);
-                Toast.makeText(this, "Account created succesfully.", Toast.LENGTH_SHORT).show()
+                databaseHelper.insertAccount(username, email, password)
+                Toast.makeText(this, "Account created successfully.", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent);
+                startActivity(intent)
                 finish()
             }
         }
