@@ -52,7 +52,7 @@ class CartActivity : AppCompatActivity() {
         val totalPriceStr: String = "Total: " + totalPricePaid.toString()+"RON"
         totalPriceText.setText(totalPriceStr)
         if (cartFull.cartItemsList.isNotEmpty()) {
-            productsListView.adapter = smpAdapter
+            productsListView.adapter =  smpAdapter
             productsListView.visibility = View.VISIBLE
 
 
