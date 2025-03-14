@@ -87,7 +87,6 @@ class MenuActivity : AppCompatActivity() {
                             productsListView.visibility = View.VISIBLE
                             productsListView.setOnItemClickListener { pparent, _, pos, _ ->
                                 val selectedItem = getItemName(pparent.getItemAtPosition(pos))
-                                Toast.makeText(this@MenuActivity, "Ai selectat $selectedItem", Toast.LENGTH_SHORT).show()
                                 var foundp : Product? = null
                                 for(p in products) {
                                     if(selectedItem == p.name && p.supplier == id.toInt()) {

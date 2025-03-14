@@ -29,6 +29,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
                 "name TEXT)")
         db?.execSQL(createProductsQuery)
 
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

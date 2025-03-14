@@ -52,4 +52,17 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cartListView" />
+
+    <EditText
+        android:id="@+id/RoomNumber"
+        android:layout_width="244dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:hint="University Room"
+        android:inputType="text"
+        android:text="Room number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartItemsTotalPrice" />
 </androidx.constraintlayout.widget.ConstraintLayout>

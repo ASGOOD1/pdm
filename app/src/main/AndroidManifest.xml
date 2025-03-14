@@ -26,6 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PDM"
         tools:targetApi="31">
+
         <activity
             android:name=".CartActivity"
             android:exported="false" />

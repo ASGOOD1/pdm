@@ -44,6 +44,9 @@ android {
         exclude("META-INF/ASL2.0")
         exclude("META-INF/*.kotlin_module")
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -60,6 +63,8 @@ dependencies {
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.google.auth.library.oauth2.http)
     implementation(libs.okhttp)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
