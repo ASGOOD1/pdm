@@ -95,7 +95,7 @@ class CartActivity : AppCompatActivity() {
             else if(s.length > 3 && (s[2] < '0' || s[2] > '9')) return false
             if(s[0] == 'F' && s.length<4) return false
             else if(s[0] == 'A' && s.length<3) return false
-
+            else if((s[0] in '0'..'9') && s.length<3) return false
             return true
         }
     }
