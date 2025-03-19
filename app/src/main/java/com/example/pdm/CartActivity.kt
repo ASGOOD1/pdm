@@ -60,9 +60,7 @@ class CartActivity : AppCompatActivity() {
             productsListView.adapter =  smpAdapter
             productsListView.visibility = View.VISIBLE
             btnSendCommand.show()
-            for (p in CartFull.cartItemsList) {
-                CartFull.cartItemsList.remove(p)
-            }
+
             btnSendCommand.setOnClickListener {
                 val editTextRoom: EditText = findViewById(R.id.RoomNumber)
                 if(editTextRoom.length() < 2 || editTextRoom.length() > 4) {
@@ -79,7 +77,12 @@ class CartActivity : AppCompatActivity() {
                 startActivity(intent)
                 Toast.makeText(this, "Your order has been placed sucesfully.", Toast.LENGTH_SHORT)
                     .show()
+                databaseHelper.insertCommand(UserData.userid, 0, totalPricePaid, editTextRoom.text.toString(), CartFull.cartItemsList)
+                for (p in CartFull.cartItemsList) {
+                    CartFull.cartItemsList.remove(p)
+                }
                 finish()
+
             }
 
 
@@ -89,7 +92,8 @@ class CartActivity : AppCompatActivity() {
     }
     companion object {
         fun checkRoom(s: String) : Boolean {
-            if(s != "AIM" && s != "AM" && s[0] != 'A' && s[0] != 'F' && (s[0] < '0' || s[0] > '9'))
+            if(s == "AIM" || s=="AM") return true
+            else if(s[0] != 'A' && s[0] != 'F' && (s[0] < '0' || s[0] > '9'))
                 return false
             else if(s.length > 2 && (s[1] < '0' || s[1] > '9')) return false
             else if(s.length > 3 && (s[2] < '0' || s[2] > '9')) return false

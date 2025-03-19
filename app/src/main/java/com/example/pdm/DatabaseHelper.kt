@@ -29,15 +29,87 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
                 "name TEXT)")
         db?.execSQL(createProductsQuery)
 
+        val createCommandsQuery = ("CREATE TABLE IF NOT EXISTS commands (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ClientID INTEGER DEFAULT 0," +
+                "CourierID INTEGER DEFAULT 0," +
+                "TotalPrice INTEGER DEFAULT 0," +
+                "Room TEXT)")
+        db?.execSQL(createCommandsQuery)
+
+        val createCommandsProductsQuery = ("CREATE TABLE IF NOT EXISTS commands_products (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ProductID INTEGER DEFAULT 0," +
+                "NumberOfProducts INTEGER DEFAULT 0," +
+                "CommandID INTEGER DEFAULT 0)")
+        db?.execSQL(createCommandsProductsQuery)
+
 
     }
+
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
         onCreate(db)
 
     }
+    fun insertCommand(clientid: Int, courierid: Int, price: Int, room: String, prodList: MutableList<Cartitem>) {
+        val values = ContentValues().apply {
+            put("ClientID", clientid)
+            put("CourierID", courierid)
+            put("TotalPrice", price)
+            put("Room", room)
+        }
+        val db = writableDatabase
+        val id : Long =  db.insert("commands", null, values)
+        val c = Commands(id.toInt(), clientid, courierid, price, room)
+        Commands.insertCommand(c)
+        for(p in prodList) {
+            c.getCommandsProducts().add(ProductCommand(p.product.id, p.qty, id.toInt()))
+            insertCommandProduct(p.product.id, p.qty, id.toInt())
+        }
+    }
+    private fun insertCommandProduct(prodid: Int, number: Int, cmd: Int) {
+        val values = ContentValues().apply {
+            put("ProductID", prodid)
+            put("NumberOfProducts", number)
+            put("CommandID", cmd)
+        }
+        val db = writableDatabase
+        db.insert("commands_products", null, values)
+    }
+    fun loadCommands() {
+        val db = readableDatabase
+        val cursor =  db.query("commands", null, "ID > ?", arrayOf("0"), null, null, null)
+        while (cursor.moveToNext()) {
+            Commands.insertCommand(Commands(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("ClientID")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("CourierID")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("TotalPrice")),
+                cursor.getString(cursor.getColumnIndexOrThrow("Room"))))
+        }
+        cursor.close()
+        for(c in Commands.commandsList) {
+            loadCommandProducts(c)
+        }
+    }
+    private fun loadCommandProducts(c: Commands) {
+        val db = readableDatabase
+        val selection = "CommandID = ?"
+        val selectionArgs = arrayOf(c.commandid.toString())
+        val cursor = db.query("commands_products", null, selection, selectionArgs, null, null, null)
+        while(cursor.moveToNext()) {
+            c.insertCommandProduct(
+                ProductCommand(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("ProductID")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("NumberOfProducts")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("CommandID"))
+                )
+            )
+        }
 
+        cursor.close()
+    }
     fun loadProducts(supplier: Long) : MutableList<Product> {
         val products = mutableListOf<Product>()
         val db = readableDatabase
@@ -91,7 +163,19 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         val selection = "user = ? AND password = ?"
         val selectionArgs = arrayOf(user, pwd)
         val cursor = db.query("accounts", null, selection, selectionArgs, null, null, null, null)
-        val userExists = cursor.count > 0
+
+        val userExists = cursor.count>0
+
+        cursor.close()
+        return userExists
+    }
+    fun retrieveID(user: String, pwd: String) : Int {
+        val db = readableDatabase
+        val selection = "user = ? AND password = ?"
+        val selectionArgs = arrayOf(user, pwd)
+        val cursor = db.query("accounts", arrayOf("id"), selection, selectionArgs, null, null, null, null)
+        cursor.moveToNext()
+        val userExists = cursor.getInt(0)
 
         cursor.close()
         return userExists
@@ -140,6 +224,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
 
     companion object {
         private const val DB_NAME = "appdata.db"
-        private const val DB_VERSION = 14
+        private const val DB_VERSION = 17
     }
 }

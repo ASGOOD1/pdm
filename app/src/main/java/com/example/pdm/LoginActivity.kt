@@ -1,9 +1,11 @@
 package com.example.pdm
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -17,6 +19,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.messaging.FirebaseMessaging
 
+
+data class UserData(private val context: Context) {
+    companion object {
+        var userid = 0
+    }
+}
 class LoginActivity : AppCompatActivity() {
     private lateinit var databaseHelper: DatabaseHelper
     @RequiresApi(Build.VERSION_CODES.O)
@@ -53,7 +61,12 @@ class LoginActivity : AppCompatActivity() {
             val username: String = textInputEditTextUsername.text.toString()
             val password: String = textInputEditTextPassword.text.toString()
             databaseHelper = DatabaseHelper(this)
+            databaseHelper.loadCommands()
+
+
+
             if(databaseHelper.loginAccountExists(username, password)) {
+                UserData.userid = databaseHelper.retrieveID(username, password)
                 Toast.makeText(this, "You succesfully logged in.", Toast.LENGTH_SHORT).show()
                 FirebaseMessaging.getInstance().token
                     .addOnCompleteListener { task ->
