@@ -110,6 +110,19 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
 
         cursor.close()
     }
+
+    fun loadAllProducts() {
+        val db = readableDatabase
+        val cursor = db.query("products", null, null, null, null, null, null)
+        while(cursor.moveToNext()) {
+            Product.addProduct(Product(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("supplier")),
+                cursor.getString(cursor.getColumnIndexOrThrow("name")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("price"))))
+        }
+        cursor.close()
+    }
+
     fun loadProducts(supplier: Long) : MutableList<Product> {
         val products = mutableListOf<Product>()
         val db = readableDatabase
@@ -138,6 +151,14 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         }
         cursor.close()
         return suppliers
+    }
+
+    fun updateCommandCourier(cmd: Int, cour: Int) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("CourierID", cour)
+        }
+        db.update("commands", values, "id=?", arrayOf(cmd.toString()))
     }
 
     fun updateAccount(token: String, user: String) {
@@ -174,6 +195,17 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         val selection = "user = ? AND password = ?"
         val selectionArgs = arrayOf(user, pwd)
         val cursor = db.query("accounts", arrayOf("id"), selection, selectionArgs, null, null, null, null)
+        cursor.moveToNext()
+        val userExists = cursor.getInt(0)
+
+        cursor.close()
+        return userExists
+    }
+    fun retrieveType(user: String, pwd: String) : Int {
+        val db = readableDatabase
+        val selection = "user = ? AND password = ?"
+        val selectionArgs = arrayOf(user, pwd)
+        val cursor = db.query("accounts", arrayOf("status"), selection, selectionArgs, null, null, null, null)
         cursor.moveToNext()
         val userExists = cursor.getInt(0)
 

@@ -5,5 +5,24 @@ data class Product(val id: Int, val supplier: Int, val name: String, val price: 
         fun addProduct(p: Product) {
             productsList.add(p)
         }
+
+        fun getProductNameFromID(id: Int): String {
+            var name = "not defined"
+            for (p in productsList) {
+                if (id == p.id) name = p.name
+            }
+            return name
+        }
+        fun getSupplierID(id: Int): Int {
+            var name = 0
+
+            for (p in productsList) {
+                if (id == p.id) {
+                    name = p.supplier
+                }
+            }
+            return name
+        }
+
     }
 }

@@ -23,6 +23,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 data class UserData(private val context: Context) {
     companion object {
         var userid = 0
+        var usertype = 0;
     }
 }
 class LoginActivity : AppCompatActivity() {
@@ -62,11 +63,12 @@ class LoginActivity : AppCompatActivity() {
             val password: String = textInputEditTextPassword.text.toString()
             databaseHelper = DatabaseHelper(this)
             databaseHelper.loadCommands()
-
+            databaseHelper.loadAllProducts()
 
 
             if(databaseHelper.loginAccountExists(username, password)) {
                 UserData.userid = databaseHelper.retrieveID(username, password)
+                UserData.usertype = 1
                 Toast.makeText(this, "You succesfully logged in.", Toast.LENGTH_SHORT).show()
                 FirebaseMessaging.getInstance().token
                     .addOnCompleteListener { task ->
@@ -81,8 +83,15 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
                     }
-                val intent = Intent(this, MenuActivity::class.java)
-                startActivity(intent)
+                if(UserData.usertype == 0) {
+                    val intent = Intent(this, MenuActivity::class.java)
+                    startActivity(intent)
+                }
+                else if(UserData.usertype == 1) {
+                    val intent = Intent(this, CourierMenuActivity::class.java)
+                    startActivity(intent)
+
+                }
 
                 finish()
             }

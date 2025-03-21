@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="89dp">
+
+        <TextView
+            android:id="@+id/orderRoom"
+            android:layout_width="99dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/room_f108"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/activeOrderAccept"
+            android:layout_width="72dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@+id/orderRoom"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_check_24" />
+
+        <TextView
+            android:id="@+id/acceptOrderTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="293dp"
+            android:text="@string/accept_order"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activeOrderAccept" />
+
+        <Spinner
+            android:id="@+id/orderDetailsDropdown"
+            android:layout_width="272dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/orderRoom" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

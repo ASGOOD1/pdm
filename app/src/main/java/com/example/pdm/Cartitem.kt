@@ -3,6 +3,8 @@ package com.example.pdm
 import android.content.Context
 import java.io.Serializable
 
+
+
 data class Cartitem(val product: Product, var qty: Int, var price: Int) : Serializable
 
 data class CartFull(private val context: Context) : Serializable {
