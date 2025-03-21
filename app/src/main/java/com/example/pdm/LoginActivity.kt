@@ -77,9 +77,7 @@ class LoginActivity : AppCompatActivity() {
                                 val token: String = task.result!!
 
                                 databaseHelper.updateAccount(token, username)
-                                //CoroutineScope(Dispatchers.IO).launch {
-                                //    FCMHelper.sendPing(token, "Ping!", "A courier is trying to reach you.");
-                                //}
+
                             }
                         }
                     }

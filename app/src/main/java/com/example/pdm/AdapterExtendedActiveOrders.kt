@@ -2,6 +2,7 @@ package com.example.pdm
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.provider.ContactsContract.Data
 import android.util.Log
 import android.view.View
@@ -10,6 +11,10 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.SimpleAdapter
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AdapterExtendedActiveOrders(
@@ -19,6 +24,7 @@ class AdapterExtendedActiveOrders(
     from: Array<String>,
     to: IntArray
 ) : SimpleAdapter(context, data, resource, from, to) {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = super.getView(position, convertView, parent)
         val databaseHelper = DatabaseHelper(context)
@@ -34,8 +40,17 @@ class AdapterExtendedActiveOrders(
             }
             else {
                 if (cmd != null) {
+                    val cmdTokenClient = Commands.getCommandID(cmd.toInt())?.clientid
                     Commands.commandsList.remove(Commands.getCommandID(cmd.toInt()))
                     databaseHelper.removeCommand(cmd.toInt())
+                    var token = ""
+                    if(cmdTokenClient != null)
+                        token = databaseHelper.retrieveClientToken(cmdTokenClient)
+                    if(token != "") {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            FCMHelper.sendPing(token, "UD Courier", "Your university courier arrived at your location.");
+                        }
+                    }
                 }
             }
             (context as Activity).recreate()

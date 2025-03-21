@@ -207,6 +207,17 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         cursor.close()
         return userExists
     }
+    fun retrieveClientToken(user: Int) : String {
+        val db = readableDatabase
+        val selection = "id=?"
+        val selectionArgs = arrayOf(user.toString())
+        val cursor = db.query("accounts", arrayOf("token"), selection, selectionArgs, null, null, null, null)
+        cursor.moveToNext()
+        val userExists = cursor.getString(0)
+
+        cursor.close()
+        return userExists
+    }
     fun retrieveType(user: String, pwd: String) : Int {
         val db = readableDatabase
         val selection = "user = ? AND password = ?"
