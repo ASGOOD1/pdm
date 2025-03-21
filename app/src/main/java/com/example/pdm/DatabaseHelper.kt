@@ -160,6 +160,12 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         }
         db.update("commands", values, "id=?", arrayOf(cmd.toString()))
     }
+    fun removeCommand(cmd: Int) {
+        val db = writableDatabase
+        db.delete("commands", "id=?", arrayOf(cmd.toString()))
+        db.delete("commands_products", "CommandID=?", arrayOf(cmd.toString()))
+        Commands.getCommandID(cmd)?.getCommandsProducts()?.clear()
+    }
 
     fun updateAccount(token: String, user: String) {
         val db = writableDatabase

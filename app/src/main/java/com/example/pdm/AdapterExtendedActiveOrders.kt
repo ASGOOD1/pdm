@@ -27,10 +27,16 @@ class AdapterExtendedActiveOrders(
         val cmd = data[position]["id"]
         // Set click listener
         acceptOrder.setOnClickListener {
-            if (cmd != null) {
+            if(data[position]["type"] == "1" && cmd != null) {
                 Commands.getCommandID(cmd.toInt())?.courierid = UserData.userid
                 databaseHelper.updateCommandCourier(cmd.toInt(), UserData.userid)
 
+            }
+            else {
+                if (cmd != null) {
+                    Commands.commandsList.remove(Commands.getCommandID(cmd.toInt()))
+                    databaseHelper.removeCommand(cmd.toInt())
+                }
             }
             (context as Activity).recreate()
 

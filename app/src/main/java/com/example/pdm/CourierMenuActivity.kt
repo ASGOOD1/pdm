@@ -28,7 +28,7 @@ class CourierMenuActivity : AppCompatActivity() {
                 val datum: MutableMap<String, String> = HashMap(2)
                 datum["room"] = "Room:" + c.room
                 datum["id"] = c.commandid.toString()
-
+                datum["type"] = 1.toString()
 
                 data.add(datum)
                 activeCommands ++
@@ -49,6 +49,36 @@ class CourierMenuActivity : AppCompatActivity() {
         }
         else {
             activeOrdersListView.visibility = View.INVISIBLE
+        }
+        val acceptedOrdersListView: ListView = findViewById(R.id.acceptOrdersListView)
+        val data2: MutableList<Map<String, String>> = mutableListOf()
+        var acceptedCommands = 0
+        for (c in Commands.commandsList) {
+            if(c.courierid == UserData.userid) {
+                val datum: MutableMap<String, String> = HashMap(2)
+                datum["room"] = "Room:" + c.room
+                datum["id"] = c.commandid.toString()
+                datum["type"] = "Mark as delivered"
+
+                data2.add(datum)
+                acceptedCommands ++
+            }
+
+        }
+        val smpAdapter2 = AdapterExtendedActiveOrders(
+            this@CourierMenuActivity, data2,
+            R.layout.active_orders_item,
+            arrayOf("room", "type"),
+            intArrayOf(
+                R.id.orderRoom, R.id.acceptOrderTextView
+            )
+        )
+        if( acceptedCommands != 0 ) {
+            acceptedOrdersListView.adapter = smpAdapter2
+            acceptedOrdersListView.visibility = View.VISIBLE
+        }
+        else {
+            acceptedOrdersListView.visibility = View.INVISIBLE
         }
     }
 }
