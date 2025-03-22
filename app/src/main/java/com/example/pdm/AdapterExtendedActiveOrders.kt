@@ -3,8 +3,6 @@ package com.example.pdm
 import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.provider.ContactsContract.Data
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -48,7 +46,7 @@ class AdapterExtendedActiveOrders(
                         token = databaseHelper.retrieveClientToken(cmdTokenClient)
                     if(token != "") {
                         CoroutineScope(Dispatchers.IO).launch {
-                            FCMHelper.sendPing(token, "UD Courier", "Your university courier arrived at your location.");
+                            FCMHelper.sendPing(token, "UD Courier", "Your university courier arrived at your location.")
                         }
                     }
                 }

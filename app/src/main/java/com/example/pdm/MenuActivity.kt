@@ -96,7 +96,7 @@ class MenuActivity : AppCompatActivity() {
                                 }
                                 if(foundp != null) {
                                     if(foundp.name == "Request Courier" && UserData.usertype != 2) {
-                                        Toast.makeText(this@MenuActivity, "Only professors can request couriers.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(this@MenuActivity, "Only professors can request couriers.", Toast.LENGTH_SHORT).show()
                                     }
                                     else {
                                         if (CartFull.isProductInList(foundp)) {
