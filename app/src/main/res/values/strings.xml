@@ -5,6 +5,10 @@
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
     <string name="unidelivery">UniDelivery</string>
+    <string name="edit_user">Edit User</string>
+    <string name="add_supplier">Add Supplier</string>
+    <string name="edit_products">Edit Products</string>
+    <string name="view_orders">View Orders</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="loginAction">LOGIN</string>
