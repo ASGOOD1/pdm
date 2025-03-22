@@ -1,6 +1,6 @@
 package com.example.pdm
 data class ProductCommand(val prodid: Int, val number: Int, val cmd: Int)
-data class Commands (val commandid: Int, val clientid: Int, var courierid: Int, val price: Int, val room: String){
+data class Commands (val commandid: Int, val clientid: Int, var courierid: Int, val price: Int, val room: String, val room2: String = "None"){
     companion object {
         var commandsList = mutableListOf<Commands>()
         fun insertCommand(c: Commands){

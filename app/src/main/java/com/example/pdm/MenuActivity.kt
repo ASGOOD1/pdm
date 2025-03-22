@@ -95,19 +95,30 @@ class MenuActivity : AppCompatActivity() {
                                     }
                                 }
                                 if(foundp != null) {
-                                    if (CartFull.isProductInList(foundp)) {
-                                        val cartItem: Cartitem? = CartFull.findItemCartID(foundp)
-                                        if(cartItem != null) {
-                                            cartItem.qty++
-                                            cartItem.price = cartItem.qty * foundp.price
-                                        }
+                                    if(foundp.name == "Request Courier" && UserData.usertype != 2) {
+                                        Toast.makeText(this@MenuActivity, "Only professors can request couriers.", Toast.LENGTH_SHORT).show();
                                     }
                                     else {
-                                        CartFull.addItemToCart(Cartitem(foundp, 1, foundp.price))
+                                        if (CartFull.isProductInList(foundp)) {
+                                            val cartItem: Cartitem? =
+                                                CartFull.findItemCartID(foundp)
+                                            if (cartItem != null) {
+                                                cartItem.qty++
+                                                cartItem.price = cartItem.qty * foundp.price
+                                            }
+                                        } else {
+                                            CartFull.addItemToCart(
+                                                Cartitem(
+                                                    foundp,
+                                                    1,
+                                                    foundp.price
+                                                )
+                                            )
+                                        }
+                                        cartItemsNr = CartFull.countItems()
+                                        str = "$cartItemsNr items"
+                                        cartItemsText.setText(str)
                                     }
-                                    cartItemsNr = CartFull.countItems()
-                                    str = "$cartItemsNr items"
-                                    cartItemsText.setText(str)
                                 }
                             }
                         }

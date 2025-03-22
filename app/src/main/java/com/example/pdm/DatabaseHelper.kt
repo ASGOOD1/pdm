@@ -260,6 +260,15 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
             db.insert("suppliers", null, values)
         }
     }
+
+    fun insertSupplier(name: String) {
+        val values = ContentValues().apply {
+            put("name", name)
+        }
+        val db = writableDatabase
+
+        db.insert("suppliers", null, values)
+    }
     fun insertProduct(name: String, s: Int, price: Int) {
         val values = ContentValues().apply {
             put("name", name)

@@ -65,10 +65,9 @@ class LoginActivity : AppCompatActivity() {
             databaseHelper.loadCommands()
             databaseHelper.loadAllProducts()
 
-
             if(databaseHelper.loginAccountExists(username, password)) {
                 UserData.userid = databaseHelper.retrieveID(username, password)
-                UserData.usertype = 1
+                UserData.usertype = 0
                 Toast.makeText(this, "You succesfully logged in.", Toast.LENGTH_SHORT).show()
                 FirebaseMessaging.getInstance().token
                     .addOnCompleteListener { task ->
@@ -81,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
                     }
-                if(UserData.usertype == 0) {
+                if(UserData.usertype == 0 || UserData.usertype == 2) {
                     val intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
                 }
