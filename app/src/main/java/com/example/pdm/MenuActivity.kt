@@ -30,10 +30,7 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         databaseHelper = DatabaseHelper(this)
         val suppliers = databaseHelper.loadSuppliers()
-        if(databaseHelper.countSuppliers() < 5) {
-            databaseHelper.insertSuppliers()
-            databaseHelper.loadSuppliers()
-        }
+
         super.onCreate(null)
         enableEdgeToEdge()
         setContentView(R.layout.activity_menu)

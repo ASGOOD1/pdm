@@ -66,4 +66,6 @@
     <string name="accept_order">Accept order</string>
     <string name="accepted_orders">Accepted Orders</string>
     <string name="active_orders">Active Orders</string>
+    <string name="user_type">User Type</string>
+    <string name="save_data">Save data</string>
 </resources>

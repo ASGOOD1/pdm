@@ -122,7 +122,18 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         }
         cursor.close()
     }
-
+    fun loadAllUserdata() {
+        val db = readableDatabase
+        val cursor = db.query("accounts", null, null, null, null, null, null)
+        while(cursor.moveToNext()) {
+            UserData.accountList.add(UserData(
+                cursor.getString(cursor.getColumnIndexOrThrow("user")),
+                cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                cursor.getInt(cursor.getColumnIndexOrThrow("status"))
+            ))
+        }
+        cursor.close()
+    }
     fun loadProducts(supplier: Long) : MutableList<Product> {
         val products = mutableListOf<Product>()
         val db = readableDatabase
@@ -175,6 +186,16 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         db.update("accounts", values, "user=?", arrayOf(user))
     }
 
+    fun updateUserData(user: String, email: String, type: Int) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("email", email)
+            put("status", type)
+        }
+        db.update("accounts", values, "user=?", arrayOf(user))
+    }
+
+
     fun insertAccount(user: String, email: String, pwd: String): Long {
         val values = ContentValues().apply {
             put("user", user)
@@ -218,17 +239,6 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         cursor.close()
         return userExists
     }
-    fun retrieveType(user: String, pwd: String) : Int {
-        val db = readableDatabase
-        val selection = "user = ? AND password = ?"
-        val selectionArgs = arrayOf(user, pwd)
-        val cursor = db.query("accounts", arrayOf("status"), selection, selectionArgs, null, null, null, null)
-        cursor.moveToNext()
-        val userExists = cursor.getInt(0)
-
-        cursor.close()
-        return userExists
-    }
 
     fun userOrEmailExists(user: String, email: String): Boolean {
         val db = readableDatabase
@@ -250,7 +260,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         return supps
     }
     fun insertSuppliers() {
-        val suppliers = listOf("Dallmayr", "Cafizzio", "NESCAFE", "Food&Drinks", "Office Things")
+        val suppliers = listOf("Dallmayr", "Cafizzio", "NESCAFE", "Food&Drinks", "Office Things", "Professor")
         for(s in suppliers) {
             val values = ContentValues().apply {
                 put("name", s)

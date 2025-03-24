@@ -27,6 +27,9 @@
         android:theme="@style/Theme.PDM"
         tools:targetApi="31">
         <activity
+            android:name=".EditUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminMenuActivity"
             android:exported="false" />
         <activity
