@@ -3,7 +3,6 @@ package com.example.pdm
 import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -11,9 +10,6 @@ import android.widget.ImageButton
 import android.widget.SimpleAdapter
 import android.widget.Spinner
 import androidx.annotation.RequiresApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class AdapterExtendedActiveOrders(
@@ -43,31 +39,10 @@ class AdapterExtendedActiveOrders(
             }
             else {
                 if (cmd != null) {
-                    val cmdTokenClient = Commands.getCommandID(cmd.toInt())?.clientid
-
-                    Log.d("ASG", "Am schimbat idu")
-                    if(Commands.getCommandID(cmd.toInt()) in Commands.commandsList) Commands.commandsList.remove(Commands.getCommandID(cmd.toInt()))
+                    if (Commands.getCommandID(cmd.toInt()) in Commands.commandsList) Commands.commandsList.remove(
+                        Commands.getCommandID(cmd.toInt())
+                    )
                     databaseHelper.removeCommand(cmd.toInt())
-                    Log.d("ASG", "Am ajuns la removeCommand")
-                    var token = ""
-                    if(cmdTokenClient != null)
-                        token = databaseHelper.retrieveClientToken(cmdTokenClient)
-                    Log.d("ASG", "Am ajuns la token: $token")
-                    if(token != "") {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            try {
-                                FCMHelper.sendPing(
-                                    token,
-                                    "UD Courier",
-                                    "Your university courier arrived at your location."
-                                )
-                                Log.d("ASG", "Ping sent successfully")
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                Log.e("ASG", "Failed to send ping: ${e.message}")
-                            }
-                        }
-                    }
                 }
             }
             (context as Activity).recreate()
