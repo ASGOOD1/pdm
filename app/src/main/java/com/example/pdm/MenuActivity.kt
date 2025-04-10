@@ -44,6 +44,12 @@ class MenuActivity : AppCompatActivity() {
         var str = "$cartItemsNr items"
         cartItemsText.setText(str)
         val spinner = findViewById<Spinner>(R.id.spinner_suppliers)
+
+        val btnGoToCart: FloatingActionButton = findViewById(R.id.goToCartBtn)
+        btnGoToCart.setOnClickListener {
+            val intent = Intent(this@MenuActivity, CartActivity::class.java)
+            startActivity(intent)
+        }
         if (spinner != null) {
             val adapter = ArrayAdapter(
                 this,
@@ -128,12 +134,6 @@ class MenuActivity : AppCompatActivity() {
                         val productsListView: ListView = findViewById(R.id.productsList)
                         productsListView.visibility = View.INVISIBLE
                     }
-                    val btnGoToCart: FloatingActionButton = findViewById(R.id.goToCartBtn)
-                    btnGoToCart.setOnClickListener {
-                        val intent = Intent(this@MenuActivity, CartActivity::class.java)
-
-                        startActivity(intent)
-                    }
 
                 }
 
@@ -142,6 +142,8 @@ class MenuActivity : AppCompatActivity() {
                 }
             }
         }
+
+
 
     }
     companion object {

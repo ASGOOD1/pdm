@@ -2,6 +2,7 @@ package com.example.pdm
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ListView
@@ -77,10 +78,12 @@ class CartActivity : AppCompatActivity() {
                 startActivity(intent)
                 Toast.makeText(this, "Your order has been placed sucesfully.", Toast.LENGTH_SHORT)
                     .show()
+
                 databaseHelper.insertCommand(UserData.userid, 0, totalPricePaid, editTextRoom.text.toString(), CartFull.cartItemsList)
-                for (p in CartFull.cartItemsList) {
-                    CartFull.cartItemsList.remove(p)
-                }
+
+                CartFull.cartItemsList.clear()
+
+
                 finish()
 
             }

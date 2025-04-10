@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
 
             if(databaseHelper.loginAccountExists(username, password)) {
                 UserData.userid = databaseHelper.retrieveID(username, password)
-                UserData.usertype = 3
+                UserData.usertype = 0
                 UserData.username = username
                 Toast.makeText(this, "You succesfully logged in.", Toast.LENGTH_SHORT).show()
                 FirebaseMessaging.getInstance().token

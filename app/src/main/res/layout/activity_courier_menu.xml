@@ -7,15 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".CourierMenuActivity">
 
+    <ListView
+        android:id="@+id/acceptOrdersListView"
+        android:layout_width="407dp"
+        android:layout_height="232dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acceptedOrders">
+
+    </ListView>
+
     <TextView
-        android:id="@+id/activeOrdersText"
-        android:layout_width="225dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/active_orders"
+        android:id="@+id/acceptedOrders"
+        android:layout_width="207dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/accepted_orders"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,28 +33,23 @@
         android:id="@+id/activeOrdersListView"
         android:layout_width="406dp"
         android:layout_height="161dp"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="9dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activeOrdersText" />
+        app:layout_constraintTop_toBottomOf="@+id/activeOrdersText">
+
+    </ListView>
 
     <TextView
-        android:id="@+id/acceptedOrders"
-        android:layout_width="207dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/accepted_orders"
+        android:id="@+id/activeOrdersText"
+        android:layout_width="225dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/active_orders"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activeOrdersListView" />
+        app:layout_constraintTop_toBottomOf="@+id/acceptOrdersListView"
+        tools:ignore="TextSizeCheck" />
 
-    <ListView
-        android:id="@+id/acceptOrdersListView"
-        android:layout_width="408dp"
-        android:layout_height="177dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acceptedOrders" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.pdm
 import android.app.Activity
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -28,6 +29,10 @@ class AdapterExtendedActiveOrders(
         val databaseHelper = DatabaseHelper(context)
         // Get the button reference
         val acceptOrder = view.findViewById<ImageButton>(R.id.activeOrderAccept)
+        if (data[position]["type"] == "1") {
+            acceptOrder.setImageResource(R.drawable.free30x30_confirm_order_icon_download_in_svg_png_gif_file_formats_approve_placed_final_food_services_pack)
+        }
+        else acceptOrder.setImageResource(R.drawable.package_order_ready_checkmark_512)
         val cmd = data[position]["id"]
         // Set click listener
         acceptOrder.setOnClickListener {
@@ -39,14 +44,18 @@ class AdapterExtendedActiveOrders(
             else {
                 if (cmd != null) {
                     val cmdTokenClient = Commands.getCommandID(cmd.toInt())?.clientid
-                    Commands.commandsList.remove(Commands.getCommandID(cmd.toInt()))
+                    if(Commands.getCommandID(cmd.toInt()) in Commands.commandsList) Commands.commandsList.remove(Commands.getCommandID(cmd.toInt()))
                     databaseHelper.removeCommand(cmd.toInt())
                     var token = ""
                     if(cmdTokenClient != null)
                         token = databaseHelper.retrieveClientToken(cmdTokenClient)
                     if(token != "") {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            FCMHelper.sendPing(token, "UD Courier", "Your university courier arrived at your location.")
+                        try {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                FCMHelper.sendPing(token, "UD Courier", "Your university courier arrived at your location.")
+                            }
+                        } catch (_: Exception) {
+
                         }
                     }
                 }
@@ -54,7 +63,7 @@ class AdapterExtendedActiveOrders(
             (context as Activity).recreate()
 
         }
-        val c : Commands? = data[position]["id"]?.let { Commands.getCommandID(it.toInt()) }
+        val c : Commands? = Commands.getCommandID(data[position]["id"]!!.toInt())
         val acceptOrderDropdown = view.findViewById<Spinner>(R.id.orderDetailsDropdown)
         if(acceptOrderDropdown != null) {
 

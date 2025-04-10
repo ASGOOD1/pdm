@@ -2,11 +2,13 @@ package com.example.pdm
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+
 
 class CourierMenuActivity : AppCompatActivity() {
     private lateinit var databaseHelper: DatabaseHelper
@@ -29,7 +31,6 @@ class CourierMenuActivity : AppCompatActivity() {
                 datum["room"] = "Room:" + c.room
                 datum["id"] = c.commandid.toString()
                 datum["type"] = 1.toString()
-
                 data.add(datum)
                 activeCommands ++
             }
@@ -43,6 +44,7 @@ class CourierMenuActivity : AppCompatActivity() {
                 R.id.orderRoom
             )
         )
+
         if( activeCommands != 0 ) {
             activeOrdersListView.adapter = smpAdapter
             activeOrdersListView.visibility = View.VISIBLE
@@ -65,6 +67,7 @@ class CourierMenuActivity : AppCompatActivity() {
             }
 
         }
+
         val smpAdapter2 = AdapterExtendedActiveOrders(
             this@CourierMenuActivity, data2,
             R.layout.active_orders_item,

@@ -85,8 +85,6 @@
         android:layout_marginTop="456dp"
         android:clickable="true"
         android:contentDescription="Cart"
-        android:focusable="auto"
-        android:focusableInTouchMode="true"
         app:backgroundTint="#855236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_suppliers"

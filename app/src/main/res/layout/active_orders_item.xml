@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="89dp">
+        android:layout_height="89dp"
+        android:background="#E69C6D">
 
         <TextView
             android:id="@+id/orderRoom"
@@ -28,9 +29,10 @@
             android:layout_height="49dp"
             android:layout_marginStart="176dp"
             android:layout_marginTop="4dp"
+            android:background="#5D543303"
             app:layout_constraintStart_toEndOf="@+id/orderRoom"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_check_24" />
+            app:srcCompat="@drawable/free30x30_confirm_order_icon_download_in_svg_png_gif_file_formats_approve_placed_final_food_services_pack" />
 
         <TextView
             android:id="@+id/acceptOrderTextView"
