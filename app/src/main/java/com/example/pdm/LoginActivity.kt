@@ -31,7 +31,7 @@ data class UserData(val name: String, var email: String, var usertype: Int) {
             {
                 if(u.name == name) {
                     user = u
-                    break;
+                    break
                 }
             }
             return user
@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
 
             if(databaseHelper.loginAccountExists(username, password)) {
                 UserData.userid = databaseHelper.retrieveID(username, password)
-                UserData.usertype = 0
+                UserData.usertype = 1
                 UserData.username = username
                 Toast.makeText(this, "You succesfully logged in.", Toast.LENGTH_SHORT).show()
                 FirebaseMessaging.getInstance().token
@@ -99,18 +99,20 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
                     }
-                if(UserData.usertype == 0 || UserData.usertype == 2) {
-                    val intent = Intent(this, MenuActivity::class.java)
-                    startActivity(intent)
-                }
-                else if(UserData.usertype == 1) {
-                    val intent = Intent(this, CourierMenuActivity::class.java)
-                    startActivity(intent)
+                when (UserData.usertype) {
+                    0, 2 -> {
+                        val intent = Intent(this, MenuActivity::class.java)
+                        startActivity(intent)
+                    }
+                    1 -> {
+                        val intent = Intent(this, CourierMenuActivity::class.java)
+                        startActivity(intent)
 
-                }
-                else {
-                    val intent = Intent(this, AdminMenuActivity::class.java)
-                    startActivity(intent)
+                    }
+                    else -> {
+                        val intent = Intent(this, AdminMenuActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
 
                 finish()

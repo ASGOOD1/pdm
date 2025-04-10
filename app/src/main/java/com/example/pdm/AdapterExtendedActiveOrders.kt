@@ -44,18 +44,28 @@ class AdapterExtendedActiveOrders(
             else {
                 if (cmd != null) {
                     val cmdTokenClient = Commands.getCommandID(cmd.toInt())?.clientid
+
+                    Log.d("ASG", "Am schimbat idu")
                     if(Commands.getCommandID(cmd.toInt()) in Commands.commandsList) Commands.commandsList.remove(Commands.getCommandID(cmd.toInt()))
                     databaseHelper.removeCommand(cmd.toInt())
+                    Log.d("ASG", "Am ajuns la removeCommand")
                     var token = ""
                     if(cmdTokenClient != null)
                         token = databaseHelper.retrieveClientToken(cmdTokenClient)
+                    Log.d("ASG", "Am ajuns la token: $token")
                     if(token != "") {
-                        try {
-                            CoroutineScope(Dispatchers.IO).launch {
-                                FCMHelper.sendPing(token, "UD Courier", "Your university courier arrived at your location.")
+                        CoroutineScope(Dispatchers.IO).launch {
+                            try {
+                                FCMHelper.sendPing(
+                                    token,
+                                    "UD Courier",
+                                    "Your university courier arrived at your location."
+                                )
+                                Log.d("ASG", "Ping sent successfully")
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                Log.e("ASG", "Failed to send ping: ${e.message}")
                             }
-                        } catch (_: Exception) {
-
                         }
                     }
                 }

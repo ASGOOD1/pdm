@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(db: SQLiteDatabase?) {
         val createAccountsTableQuery = ("CREATE TABLE IF NOT EXISTS accounts (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -270,7 +270,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
             db.insert("suppliers", null, values)
         }
     }
-
+/*
     fun insertSupplier(name: String) {
         val values = ContentValues().apply {
             put("name", name)
@@ -287,7 +287,7 @@ class DatabaseHelper(private val context: Context) : SQLiteOpenHelper(context, D
         }
         val db = writableDatabase
         db.insert("products", null, values)
-    }
+    }*/
     //----------------
 
     companion object {

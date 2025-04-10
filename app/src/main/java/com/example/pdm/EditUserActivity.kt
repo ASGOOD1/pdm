@@ -2,7 +2,7 @@ package com.example.pdm
 
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
+
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -16,7 +16,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.SearchView;
+import android.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.pdm.MenuActivity.Companion.getItemName
@@ -97,8 +97,7 @@ class EditUserActivity : AppCompatActivity() {
         Log.d("ASG", "Si aici sunt boss$createdUsersList")
         accountsSearchLV.setOnItemClickListener { pparent, _, pos, _ ->
             val selectedItem = getItemName(pparent.getItemAtPosition(pos))
-            val usr: UserData? = UserData.retrieveUser(selectedItem)
-            if(usr == null) return@setOnItemClickListener
+            val usr: UserData = UserData.retrieveUser(selectedItem) ?: return@setOnItemClickListener
             var itemPosition = usr.usertype
             usernameEditText.text = buildString {
                 append("Username: ")
@@ -113,10 +112,12 @@ class EditUserActivity : AppCompatActivity() {
             editUserSaveButton.visibility =  View.VISIBLE
 
             val userTypes = mutableListOf("Normal User", "Courier", "Professor", "Administrator")
-            if(usr.usertype == 0) userTypes.addFirst("Normal User")
-            else if (usr.usertype == 1)userTypes.addFirst("Courier")
-            else if (usr.usertype == 2)userTypes.addFirst("Professor")
-            else userTypes.addFirst("Administrator")
+            when (usr.usertype) {
+                0 -> userTypes.addFirst("Normal User")
+                1 -> userTypes.addFirst("Courier")
+                2 -> userTypes.addFirst("Professor")
+                else -> userTypes.addFirst("Administrator")
+            }
             if (userTypeSpinner != null) {
                 val adapter = ArrayAdapter(
                     this,

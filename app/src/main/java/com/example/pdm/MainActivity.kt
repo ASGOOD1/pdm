@@ -3,7 +3,6 @@ package com.example.pdm
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Website.URL
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +19,7 @@ object FCMHelper {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getAccessToken(): String {
 
-        val credentials = GoogleCredentials.fromStream(FileInputStream("/data/data/com.example.pdm/files/pdmfireb-firebase-adminsdk-fbsvc-d782dd9456.json"))
+        val credentials = GoogleCredentials.fromStream(FileInputStream("/data/data/com.example.pdm/files/pdmfireb-firebase-adminsdk-fbsvc-e436244792.json"))
             .createScoped(listOf("https://www.googleapis.com/auth/firebase.messaging"))
         credentials.refreshIfExpired()
         return credentials.accessToken.tokenValue
