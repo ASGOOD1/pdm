@@ -12,9 +12,6 @@
         android:name="android.software.leanback"
         android:required="true" />
 
-    <meta-data
-        android:name="firebase_messaging_auto_init_enabled"
-        android:value="true" />
 
     <application
         android:allowBackup="true"
