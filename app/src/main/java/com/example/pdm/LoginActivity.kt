@@ -2,7 +2,7 @@ package com.example.pdm
 
 
 import android.content.Intent
-import android.os.Build
+
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -41,7 +40,6 @@ data class UserData(val name: String, var email: String, var usertype: Int) {
 }
 class LoginActivity : AppCompatActivity() {
     private lateinit var databaseHelper: DatabaseHelper
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -85,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
 
             if(databaseHelper.loginAccountExists(username, password)) {
                 UserData.userid = databaseHelper.retrieveID(username, password)
-                UserData.usertype = 1
+                UserData.usertype = 3
                 UserData.username = username
                 Toast.makeText(this, "You succesfully logged in.", Toast.LENGTH_SHORT).show()
                 FirebaseMessaging.getInstance().token

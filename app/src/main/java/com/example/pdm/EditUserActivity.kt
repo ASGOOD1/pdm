@@ -1,9 +1,7 @@
 package com.example.pdm
 
-import android.os.Build
 import android.os.Bundle
 
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,7 +12,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.SearchView
 import androidx.core.view.ViewCompat
@@ -25,7 +22,6 @@ class EditUserActivity : AppCompatActivity() {
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var searchView: SearchView
     private lateinit var accountsSearchLV: ListView
-    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,9 +31,7 @@ class EditUserActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Log.d("ASG", "Sunt la inceput")
         databaseHelper = DatabaseHelper(this)
-        Log.d("ASG", "Am facut db")
         val usernameEditText = findViewById<TextView>(R.id.usernameEditText)
         val emailTextView = findViewById<TextView>(R.id.emailTextView)
         val emailAddresEditView = findViewById<EditText>(R.id.emailAddresEditView)
@@ -45,30 +39,24 @@ class EditUserActivity : AppCompatActivity() {
         val userTypeSpinner = findViewById<Spinner>(R.id.userTypeSpinner)
         val editUserSaveButton = findViewById<Button>(R.id.editUserSaveButton)
 
-        Log.d("ASG", "Am gasit astea boss")
         usernameEditText.visibility = View.INVISIBLE
         emailTextView.visibility =  View.INVISIBLE
         emailAddresEditView.visibility = View.INVISIBLE
         userTypeTextView.visibility =  View.INVISIBLE
         userTypeSpinner.visibility =  View.INVISIBLE
         editUserSaveButton.visibility =  View.INVISIBLE
-        Log.d("ASG", "le-am facut invizibile")
         accountsSearchLV = findViewById(R.id.accountSearchListView)
         searchView = findViewById(R.id.userSearchView)
-        Log.d("ASG", "Am gasit si astea boss")
         val createdUsersList = mutableListOf<String>()
-        Log.d("ASG", "Am ajuns la userlist")
         for (u in UserData.accountList) {
             createdUsersList.add(u.name)
         }
-        Log.d("ASG", "Am aj aici$createdUsersList")
         val listAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             this,
             android.R.layout.simple_list_item_1,
             createdUsersList
         )
         accountsSearchLV.adapter = listAdapter
-        Log.d("ASG", "Am aj si aici la adapter$createdUsersList")
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // on below line we are checking
@@ -94,7 +82,6 @@ class EditUserActivity : AppCompatActivity() {
                 return false
             }
         })
-        Log.d("ASG", "Si aici sunt boss$createdUsersList")
         accountsSearchLV.setOnItemClickListener { pparent, _, pos, _ ->
             val selectedItem = getItemName(pparent.getItemAtPosition(pos))
             val usr: UserData = UserData.retrieveUser(selectedItem) ?: return@setOnItemClickListener
@@ -111,13 +98,17 @@ class EditUserActivity : AppCompatActivity() {
             userTypeSpinner.visibility =  View.VISIBLE
             editUserSaveButton.visibility =  View.VISIBLE
 
-            val userTypes = mutableListOf("Normal User", "Courier", "Professor", "Administrator")
+            val userTypes = mutableListOf<String>()
             when (usr.usertype) {
-                0 -> userTypes.addFirst("Normal User")
-                1 -> userTypes.addFirst("Courier")
-                2 -> userTypes.addFirst("Professor")
-                else -> userTypes.addFirst("Administrator")
+                0 -> userTypes.add("Normal User")
+                1 -> userTypes.add("Courier")
+                2 -> userTypes.add("Professor")
+                else -> userTypes.add("Administrator")
             }
+            userTypes.add("Normal User")
+            userTypes.add("Courier")
+            userTypes.add("Professor")
+            userTypes.add("Administrator")
             if (userTypeSpinner != null) {
                 val adapter = ArrayAdapter(
                     this,
