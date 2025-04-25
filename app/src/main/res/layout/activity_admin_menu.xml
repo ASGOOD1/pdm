@@ -18,31 +18,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonAddSupplier"
-        android:layout_width="191dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/add_supplier"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editUserButton" />
-
-    <Button
         android:id="@+id/buttonEditProducts"
         android:layout_width="191dp"
         android:layout_height="62dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:text="@string/edit_products"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddSupplier" />
+        app:layout_constraintTop_toBottomOf="@+id/editUserButton" />
 
     <Button
         android:id="@+id/buttonViewCommands"
         android:layout_width="191dp"
         android:layout_height="62dp"
         android:layout_marginStart="108dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:text="@string/view_orders"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonEditProducts" />
