@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/activeOrderAccept" />
 
         <Spinner
-            android:id="@+id/orderDetailsDropdown"
+            android:id="@+id/orderAdminDetailsDropdown"
             android:layout_width="272dp"
             android:layout_height="29dp"
             android:layout_marginStart="16dp"

@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/orderDetailsDropdown"
+            android:id="@+id/orderAdminDetailsDropdown"
             android:layout_width="379dp"
             android:layout_height="31dp"
             android:layout_marginStart="16dp"

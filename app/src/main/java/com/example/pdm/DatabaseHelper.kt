@@ -229,6 +229,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
         return userExists
     }
 
+    fun retrieveName(user: Int) : String {
+        val db = readableDatabase
+        val selection = "id = ?"
+        val selectionArgs = arrayOf(user.toString())
+        val cursor = db.query("accounts", arrayOf("user"), selection, selectionArgs, null, null, null, null)
+        cursor.moveToNext()
+        val userExists = cursor.getString(0)
+
+        cursor.close()
+        return userExists
+    }
 
     fun userOrEmailExists(user: String, email: String): Boolean {
         val db = readableDatabase
