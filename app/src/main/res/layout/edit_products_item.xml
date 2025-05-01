@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="#6F4425">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="89dp"
+        android:background="#E69C6D">
+
+        <TextView
+            android:id="@+id/epiProductNameText"
+            android:layout_width="213dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/prod_name"
+            android:textColor="#4E342E"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:id="@+id/epiProductPrice"
+            android:layout_width="160dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="11dp"
+            android:text="@string/product_price_number"
+            android:textColor="#4E342E"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/epiProductNameText"
+            tools:ignore="TextSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/epiEditProductButton"
+            android:layout_width="75dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="16dp"
+            android:background="#5D543303"
+            android:contentDescription="@string/edit_products"
+            app:layout_constraintStart_toEndOf="@+id/epiProductNameText"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_settings_24" />
+
+        <ImageButton
+            android:id="@+id/epiDeleteProductButton"
+            android:layout_width="75dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="16dp"
+            android:background="#5D543303"
+            android:contentDescription="@string/delete_product"
+            app:layout_constraintStart_toEndOf="@+id/epiEditProductButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icons8_trash" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

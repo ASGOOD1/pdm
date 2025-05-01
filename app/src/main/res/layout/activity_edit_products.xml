@@ -5,4 +5,88 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditProductsActivity"/>
+    tools:context=".EditProductsActivity"
+    tools:ignore="VisualLintBounds">
+
+    <Spinner
+        android:id="@+id/editProductsSpinner"
+        android:layout_width="408dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/editProductsListView"
+        android:layout_width="409dp"
+        android:layout_height="137dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductsSpinner" />
+
+    <EditText
+        android:id="@+id/editProductsEditText"
+        android:layout_width="366dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/product_name"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColorHint="#3E2723"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductsListView" />
+
+    <EditText
+        android:id="@+id/editProductsPriceText"
+        android:layout_width="363dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="@string/product_price_number"
+        android:importantForAutofill="no"
+        android:inputType="number|numberSigned"
+        android:textColorHint="#3E2723"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductsEditText" />
+
+    <Button
+        android:id="@+id/editProductUpdateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/update_product"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductsPriceText" />
+
+    <TextView
+        android:id="@+id/editProductsAddTextView"
+        android:layout_width="197dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="88dp"
+        android:text="@string/add_new_product"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductUpdateButton"
+        tools:ignore="TextSizeCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editProductsAddFloatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="20dp"
+        android:background="#00451E1E"
+        android:contentDescription="@string/add_new_product"
+        app:backgroundTint="#A66140"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductsAddTextView"
+        app:srcCompat="@drawable/baseline_add_24"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>
