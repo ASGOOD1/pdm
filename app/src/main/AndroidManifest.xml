@@ -23,6 +23,9 @@
         android:theme="@style/Theme.PDM"
         tools:targetApi="31">
         <activity
+            android:name=".EditProductsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewOrders"
             android:exported="false" />
         <activity
