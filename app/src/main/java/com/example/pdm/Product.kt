@@ -5,7 +5,9 @@ data class Product(val id: Int, val supplier: Int, val name: String, val price: 
         fun addProduct(p: Product) {
             productsList.add(p)
         }
-
+        fun getProdList(): MutableList<Product> {
+            return productsList
+        }
         fun getProductNameFromID(id: Int): String {
             var name = "not defined"
             for (p in productsList) {

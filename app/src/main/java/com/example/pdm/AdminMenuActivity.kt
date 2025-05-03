@@ -29,5 +29,10 @@ class AdminMenuActivity : AppCompatActivity() {
             val intent = Intent(this, ViewOrders::class.java)
             startActivity(intent)
         }
+        val btnEditProductsAdmin = findViewById<Button>(R.id.buttonEditProducts)
+        btnEditProductsAdmin.setOnClickListener {
+            val intent = Intent(this, EditProductsActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
