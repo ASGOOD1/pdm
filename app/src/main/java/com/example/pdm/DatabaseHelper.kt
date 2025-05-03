@@ -284,6 +284,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
             db.insert("suppliers", null, values)
         }
     }
+    fun insertProduct(name: String, s: Int, price: Int) : Int {
+        val values = ContentValues().apply {
+            put("name", name)
+            put("supplier", s)
+            put("price", price)
+        }
+        val db = writableDatabase
+        return db.insert("products", null, values).toInt()
+    }
 /*
     fun insertSupplier(name: String) {
         val values = ContentValues().apply {
@@ -293,15 +302,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
 
         db.insert("suppliers", null, values)
     }
-    fun insertProduct(name: String, s: Int, price: Int) {
-        val values = ContentValues().apply {
-            put("name", name)
-            put("supplier", s)
-            put("price", price)
-        }
-        val db = writableDatabase
-        db.insert("products", null, values)
-    }*/
+    */
     //----------------
 
     companion object {

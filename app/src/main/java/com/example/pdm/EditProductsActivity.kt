@@ -6,6 +6,7 @@ TODO:
 
 package com.example.pdm
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -22,11 +23,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class EditProductsActivity : AppCompatActivity() {
     companion object {
         var selectedProduct : Product? = null
         var productNameTextView : TextView? = null
         var productPriceTextView : TextView? = null
+        var selectedSupplier: Int = 0
     }
     private lateinit var databaseHelper: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +48,20 @@ class EditProductsActivity : AppCompatActivity() {
         val editText2 = findViewById<EditText>(R.id.editProductsPriceText)
         val editButton = findViewById<Button>(R.id.editProductUpdateButton)
         val addProductButton = findViewById<FloatingActionButton>(R.id.editProductsAddFloatingButton)
+        val addProductTextView = findViewById<TextView>(R.id.editProductsAddTextView)
 
         editText1.visibility = View.INVISIBLE
         editButton.visibility = View.INVISIBLE
         editText2.visibility = View.INVISIBLE
-        addProductButton.visibility = View.VISIBLE
-
+        addProductButton.visibility = View.INVISIBLE
+        addProductTextView.visibility = View.INVISIBLE
+        addProductButton.setOnClickListener {
+            if(selectedSupplier != 0) {
+                finish()
+                val intent = Intent(this@EditProductsActivity, InsertProductActivity::class.java)
+                startActivity(intent)
+            }
+        }
         editButton.setOnClickListener {
             if(selectedProduct != null) {
                 databaseHelper.updateProduct(editText1.text.toString(), editText2.text.toString().toInt(), selectedProduct!!.id)
@@ -76,6 +87,9 @@ class EditProductsActivity : AppCompatActivity() {
                     view: View, position: Int, id: Long
                 ) {
                     if(id.toInt() != 0) {
+                        addProductButton.visibility = View.VISIBLE
+                        addProductTextView.visibility = View.VISIBLE
+                        selectedSupplier = id.toInt()
                         val productsListView: ListView = findViewById(R.id.editProductsListView)
                         val data: MutableList<Map<String, String>> = mutableListOf()
 
@@ -121,6 +135,7 @@ class EditProductsActivity : AppCompatActivity() {
                         editButton.visibility = View.INVISIBLE
                         editText2.visibility = View.INVISIBLE
                         addProductButton.visibility = View.INVISIBLE
+                        addProductTextView.visibility = View.INVISIBLE
 
                     }
 

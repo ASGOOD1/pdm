@@ -74,4 +74,5 @@
     <string name="update_product">UPDATE PRODUCT</string>
     <string name="add_new_product">ADD NEW PRODUCT</string>
     <string name="delete_product">Delete product</string>
+    <string name="insert_product">Insert Product</string>
 </resources>
