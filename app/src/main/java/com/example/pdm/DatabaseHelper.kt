@@ -177,6 +177,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
         db.delete("commands_products", "CommandID=?", arrayOf(cmd.toString()))
         Commands.getCommandID(cmd)?.getCommandsProducts()?.clear()
     }
+    fun removeProduct(cmd: Int) {
+        val db = writableDatabase
+        db.delete("products", "id=?", arrayOf(cmd.toString()))
+    }
 
     fun updateAccount(token: String, user: String) {
         val db = writableDatabase
@@ -184,6 +188,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
             put("token", token)
         }
         db.update("accounts", values, "user=?", arrayOf(user))
+    }
+
+    fun updateProduct(name: String, price: Int, id: Int) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("name", name)
+            put("price", price.toString())
+        }
+        db.update("products", values, "id=?", arrayOf(id.toString()))
     }
 
     fun updateUserData(user: String, email: String, type: Int) {

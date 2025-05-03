@@ -1,5 +1,5 @@
 package com.example.pdm
-data class Product(val id: Int, val supplier: Int, val name: String, val price: Int) {
+data class Product(val id: Int, val supplier: Int, var name: String, var price: Int) {
     companion object {
         private val productsList = mutableListOf<Product>()
         fun addProduct(p: Product) {

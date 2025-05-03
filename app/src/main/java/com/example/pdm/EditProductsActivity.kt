@@ -1,16 +1,12 @@
-/*TODO: Edit products
-    - Spinner with suppliers and listview with products
-    - Product data underneath (can be updated or deleted by pressing a specific button on the list view)
-    - Can be completed directly and then saved by pressing save(Update existing)
-    - Product can be added by pressing + floating button(new)
-
+/*
+TODO:
+    ADD PRODUCT ACTIVITY
 
  */
 
 package com.example.pdm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +23,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class EditProductsActivity : AppCompatActivity() {
+    companion object {
+        var selectedProduct : Product? = null
+        var productNameTextView : TextView? = null
+        var productPriceTextView : TextView? = null
+    }
     private lateinit var databaseHelper: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,17 @@ class EditProductsActivity : AppCompatActivity() {
         editButton.visibility = View.INVISIBLE
         editText2.visibility = View.INVISIBLE
         addProductButton.visibility = View.VISIBLE
+
+        editButton.setOnClickListener {
+            if(selectedProduct != null) {
+                databaseHelper.updateProduct(editText1.text.toString(), editText2.text.toString().toInt(), selectedProduct!!.id)
+                selectedProduct!!.price = editText2.text.toString().toInt()
+                selectedProduct!!.name = editText1.text.toString()
+                Toast.makeText(this, "Product data updated succesfully!", Toast.LENGTH_SHORT).show()
+                productNameTextView!!.text = selectedProduct!!.name
+                productPriceTextView!!.text = "Price: " + selectedProduct!!.price + "RON"
+            }
+        }
         if (spinner != null) {
             val adapter = ArrayAdapter(
                 this,
@@ -110,6 +123,7 @@ class EditProductsActivity : AppCompatActivity() {
                         addProductButton.visibility = View.INVISIBLE
 
                     }
+
 
                 }
 
